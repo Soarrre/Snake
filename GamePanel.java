@@ -70,12 +70,12 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 
 	public void move() {
-		for (int i = bodyParts; i > 0; i--) {
-			x[i] = x[i - 1];
-			y[i] = y[i - 1];
+		for(int i = bodyParts;i>0;i--) {
+			x[i] = x[i-1];
+			y[i] = y[i-1];
 		}
-
-		switch (direction) {
+		
+		switch(direction) {
 		case 'U':
 			y[0] = y[0] - UNIT_SIZE;
 			break;
@@ -86,7 +86,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			x[0] = x[0] - UNIT_SIZE;
 			break;
 		case 'R':
-			y[0] = y[0] + UNIT_SIZE;
+			x[0] = x[0] + UNIT_SIZE;
 			break;
 		}
 
@@ -115,8 +115,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		if (y[0] < 0) {
 			running = false;
 		}
-		// checks if the head touches bottom border
-		if (y[0] < SCREEN_HEIGHT) {
+		// checks if the head touches bottom border		
+		if (y[0] > SCREEN_HEIGHT) {
 			running = false;
 		}
 		if (!running) {
@@ -142,7 +142,28 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-
+			switch(e.getKeyCode()) {
+			case KeyEvent.VK_LEFT:
+				if(direction != 'R') {
+					direction = 'L';
+				}
+				break;
+			case KeyEvent.VK_RIGHT:
+				if(direction != 'L') {
+					direction = 'R';
+				}
+				break;
+			case KeyEvent.VK_UP:
+				if(direction != 'D') {
+					direction = 'U';
+				}
+				break;
+			case KeyEvent.VK_DOWN:
+				if(direction != 'U') {
+					direction = 'D';
+				}
+				break;
+			}
 		}
 
 	}
